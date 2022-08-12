@@ -66,6 +66,7 @@ def post_data(url, filename=''):
     files['file'] = filename
 
     if not filename: return
+    files = {'file': open(filename ,'rb')}
 
     try:
         response = requests.post(url,files)
@@ -76,6 +77,8 @@ def post_data(url, filename=''):
         is_uploaded = response.status == 200
         if is_uploaded : print("Success : File(s) uploaded successfully!")
         else           : print("Error :" + str(response.status) + ": Couldn't upload file(s)!")
+         print(response.text)
+         print(response.status)
     return
 
 results = get_data(root_url)
