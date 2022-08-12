@@ -1,4 +1,5 @@
 from urllib import request, error
+#import urllib
 import json,csv
 from os import path,startfile
 from pprint import pprint
@@ -117,9 +118,10 @@ def post_data(url, filename=''):
     if not filename: return
 
     try:
-        response = request.post(url,files)
-    except:
-        print("Couldn't reach URL")
+        response = request.urlopen(url,files)
+    except Exception as e:
+        print("Error: Couldn't reach URL")
+        print(e)
         return None
     else:
         is_uploaded = response.status == 200
@@ -146,12 +148,14 @@ def show_data(selected_characters,max_characters=3):
 if __name__ == '__main__':
 
     url = r'https://swapi.dev/api/people/'
+    server = r'http://httpbin.org/'
+
     using_std_lib = True
     json_data = get_data(url, using_std_lib)
     if json_data:
         selected_characters = get_top_characters(json_data,5)
         if selected_characters:
             show_data(selected_characters)
-        #write_data(selected_characters)
-        #post_data(selected_characters)
+        write_data(selected_characters)
+        post_data(server,selected_characters)
     input()
