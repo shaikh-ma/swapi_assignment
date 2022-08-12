@@ -111,14 +111,23 @@ def post_data(url, filename=''):
     filename -> Name of the file to be uploaded.
 
     '''
-    
     files = {}
-    files['file'] = filename
-
+    files['file'] = files
+    
     if not filename: return
-
+    post_data = {
+        'title': '10 Characters that appeared in most Star Wars movie',
+        'files': filename
+    }
+    
     try:
-        response = request.urlopen(url,files)
+        
+        json_string = json.dumps(post_data)
+        post_data = json_string.encode("utf-8")
+        headers = {"Content-Type":"applicatoin/json"}
+
+        the_request = request.Request( url, data=post_data, headers=headers)
+        response = request.urlopen(the_request)      
     except Exception as e:
         print("Error: Couldn't reach URL")
         print(e)
@@ -127,6 +136,8 @@ def post_data(url, filename=''):
         is_uploaded = response.status == 200
         if is_uploaded : print("Success : File(s) uploaded successfully!")
         else           : print("Error :" + str(response.status) + ": Couldn't upload file(s)!")
+        print(response.read().decode('utf-8'))
+        print(response.status)
     return
 
 
@@ -148,14 +159,13 @@ def show_data(selected_characters,max_characters=3):
 if __name__ == '__main__':
 
     url = r'https://swapi.dev/api/people/'
-    server = r'http://httpbin.org/'
+    server = r'http://httpbin.org/anything'
 
     using_std_lib = True
     json_data = get_data(url, using_std_lib)
     if json_data:
         selected_characters = get_top_characters(json_data,5)
         if selected_characters:
-            show_data(selected_characters)
-        write_data(selected_characters)
-        post_data(server,selected_characters)
-    input()
+            #show_data(selected_characters)
+            write_data(selected_characters)
+            post_data(server,selected_characters)
