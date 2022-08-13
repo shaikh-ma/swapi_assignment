@@ -141,7 +141,7 @@ def post_data(url, filename=''):
             print('Success: File uploaded sucessfully! status : ' + str(response.status), end='\n')
         else:
             print("Error :" + str(response.status) + ": Couldn't upload file(s)!", end='\n')
-    return
+    return response.text, response.status
 
     
 def show_data(selected_characters,max_characters=None):

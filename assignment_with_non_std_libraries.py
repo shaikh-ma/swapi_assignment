@@ -9,6 +9,7 @@ def get_data(url):
         data = response.content.decode()
     except Exception as e:
         print("Error : Could'nt reach the server")
+        print(e)
         return None
     else:
         json_data = json.loads(data)
@@ -65,16 +66,18 @@ def post_data(url, filename=''):
 
     try:
         response = requests.post(url,files)
-    except:
+        upload_status = response.status_code
+    except Exception as e:
         print("Couldn't reach URL")
+        print(e)
         return None
     else:
-        if response.status_code == 200  : print("Success : File(s) uploaded successfully!")
-        else                            : print("Error :" +
-        str(response.status_code) + ": Couldn't upload file(s)!")
-        print(response.text)
-        print(response.status_code)
-    return response.text,response.status_code
+        if upload_status == 200  :
+            print("Success : File(s) uploaded successfully! - status : " + str(upload_status))
+            print(str(response.text))
+        else:
+             print("Error : Couldn't upload file(s)! - status : " + str(upload_status))
+    return response.text,upload_status
 
 
 if __name__ == '__main__':
