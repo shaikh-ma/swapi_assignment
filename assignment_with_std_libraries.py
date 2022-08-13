@@ -1,7 +1,7 @@
 from urllib import request, error
 #import urllib
 import json,csv
-from os import path,startfile
+from os import path 
 from pprint import pprint
 
 
@@ -11,25 +11,26 @@ def get_data(url, using_std_lib=True):
     ''' Retriveing data from the server '''
 
     try:
-        if using_std_lib : response = request.urlopen(url)
-        else             : response = requests.get(url)
-
-    except Exception: #error.URLError:
-        print("Error : Couldn't reach the URL")
+        response = request.urlopen(url)
+        #if using_std_lib : response = request.urlopen(url)
+        #else             : response = requests.get(url)
+    except Exception as e: #error.URLError:
+        print("Error : Couldn't reach the URL", end='\n')
+        print(e, end="\n")
         return None
     else:
         is_received = response.status == 200
         
         if is_received:
-            print('Success: ' + str(response.status))
-            if using_std_lib : data = response.read().decode()
-            else             : data = response.content.decode() 
+            print('Success: Data retrieved successfully! - Status code: ' +
+            str(response.status), end='\n')
+            data = response.read().decode()
+            #if using_std_lib : data = response.read().decode()
+            #else             : data = response.content.decode() 
             json_data = json.loads(data)
         else:
-            print("Error :" + str(response.status) + ": Couldn't find the data")
+            print("Error :" + str(response.status) + " -  Couldn't find the data", end='\n')
     return json_data
-
-
 
 
 def get_top_characters(json_data, max_characters=10):
@@ -47,13 +48,13 @@ def get_top_characters(json_data, max_characters=10):
     try:
         int(max_characters)
     except Exception:
-        print("Error : Max characters should be entered as a integet number")
+        print("Error : Max characters should be entered as a integer number", end='\n')
         return None
 
     try:
         characters = json_data['results']
     except:
-        print('"Error : Required fields not found.')
+        print('"Error : Required fields not found.', end='\n')
         return None
     else:
         characters.sort(key=lambda x: len(x['films']),reverse=True)
@@ -98,26 +99,27 @@ def write_data(selected_characters, filename = 'Exported.csv'):
         for row in selected_characters:
             line = [row['name'],row['species_name'],row['height'],row['appearances']]
             csv_writer.writerow(line)
-    print('Success : File Saved!')
-    #startfile(exported_file)
+    print('Success : File Saved as ' + filename, end='\n')
+    return filename
 
 
 def post_data(url, filename=''):
     '''
-
     Uploading the files to the server.
 
     url      -> server URL.
     filename -> Name of the file to be uploaded.
 
     '''
-    files = {}
-    files['file'] = files
-    
+   
     if not filename: return
+
+    files = {}
+    files['file'] =  str(open(filename).read().strip())    
+
     post_data = {
         'title': '10 Characters that appeared in most Star Wars movie',
-        'files': filename
+        'files': files  
     }
     
     try:
@@ -129,43 +131,43 @@ def post_data(url, filename=''):
         the_request = request.Request( url, data=post_data, headers=headers)
         response = request.urlopen(the_request)      
     except Exception as e:
-        print("Error: Couldn't reach URL")
-        print(e)
+        print("Error: Couldn't reach URL", end='\n')
+        print(e, end='\n')
         return None
     else:
-        is_uploaded = response.status == 200
-        if is_uploaded : print("Success : File(s) uploaded successfully!")
-        else           : print("Error :" + str(response.status) + ": Couldn't upload file(s)!")
-        print(response.read().decode('utf-8'))
-        print(response.status)
+        if response.status == 200 :
+            response_text = json.loads(response.read().decode('utf-8'))
+            pprint(response_text)
+            print('Success: File uploaded sucessfully! status : ' + str(response.status), end='\n')
+        else:
+            print("Error :" + str(response.status) + ": Couldn't upload file(s)!", end='\n')
     return
 
-
     
-def show_data(selected_characters,max_characters=3):
+def show_data(selected_characters,max_characters=None):
     ''' Show json data for exported data. '''
+
+    if not max_characters: max_characters = len(selected_characters)
     
     for num,character in enumerate(selected_characters):
         if num >= max_characters:break
         print('-'*50,end='\n')
-        print('Character ' + str(num) + ': ' + character['name'].center(48))
+        print('Character ' + str(num+1) + ':     ' + character['name'])
         print('-'*50,end='\n')
         pprint(character)
         print('-'*50,end='\n')
     return
 
 
-
 if __name__ == '__main__':
-
-    url = r'https://swapi.dev/api/people/'
+    url    = r'https://swapi.dev/api/people/'
     server = r'http://httpbin.org/anything'
 
     using_std_lib = True
     json_data = get_data(url, using_std_lib)
     if json_data:
-        selected_characters = get_top_characters(json_data,5)
+        selected_characters = get_top_characters(json_data)
         if selected_characters:
-            #show_data(selected_characters)
-            write_data(selected_characters)
-            post_data(server,selected_characters)
+            show_data(selected_characters)
+            filename = write_data(selected_characters)
+            post_data(server,filename)
