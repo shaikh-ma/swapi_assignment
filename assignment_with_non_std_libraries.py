@@ -4,18 +4,49 @@ import pandas as pd
 
 
 def get_data(url):
+    
+    ''' 
+    Retriveing data from the server.
+
+    parameter:
+
+    url -> url of the server from which to get the data.
+    
+    returns the data if received, otherwise None.
+
+    '''
     try:
         response = requests.get(url)
-        data = response.content.decode()
-    except Exception as e:
-        print("Error : Could'nt reach the server")
+    except Exception as e: #error.URLError:
+        print("Error : Couldn't reach the URL", end='\n')
+        print(e, end="\n")
         return None
     else:
-        json_data = json.loads(data)
+                
+        if response.status_code == 200:
+            print('Success: Data retrieved successfully! - Status code: ' +
+            str(response.status_code), end='\n')
+            data = response.content.decode()
+            json_data = json.loads(data)
+        else:
+            print("Error :" + str(response.status_code) + " -  Couldn't find the data", end='\n')
     return json_data
 
 
 def get_top_characters(json_data, max_characters=10):
+
+    '''
+       Extracting requreed data into a json object.
+
+       json_data -> The json file containing the data from server.
+       
+       max_characters -> Number of characters for which the data should be filtered.
+                         By default, extracts data for 10 characters if no value is passed.
+
+       Returns json format for the number of characters appearing in most films.
+
+    '''
+  
     characters = json_data['results']
     characters.sort(key=lambda x:len(x['films']), reverse=True)
     
@@ -39,25 +70,41 @@ def get_top_characters(json_data, max_characters=10):
     return df
 
 def show_data(selected_characters,max_characters=None):
+    
+    ''' Show json data for exported data. '''
+
     if not max_characters: max_characters = int(selected_characters.shape[0])
     print(selected_characters.head(max_characters))
     return
 
 
 def write_data(selected_characters,filename='Exported.csv'):
+
+    '''
+        Storing the extracted data in a csv file.
+
+        If the file name is passed, it's named as "Exported.csv".
+
+        The file is saved in the same folder as the script.
+
+        Returns the filename.
+    '''
     export_columns = ['name','species','height','appearances']
     selected_characters.to_csv(filename, index=False, header=False, columns=export_columns, sep=',', encoding='utf-8')
     return filename
 
 def post_data(url, filename=''):
+
     '''
     Uploading the files to the server.
 
     url      -> server URL.
     filename -> Name of the file to be uploaded.
 
+    Returns the tuple containing response object from the request and the status code.
+
     '''
-    
+   
     files = {}
 
     if not filename: return
@@ -83,7 +130,7 @@ if __name__ == '__main__':
 
     results = get_data(url)
     if results:
-        selected_characters  = get_top_characters(results)
+        selected_characters = get_top_characters(results)
         if selected_characters is not None:
            show_data(selected_characters)
            write_data(selected_characters)

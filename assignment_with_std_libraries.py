@@ -6,14 +6,21 @@ from pprint import pprint
 
 
 
-def get_data(url, using_std_lib=True):
+def get_data(url):
 
-    ''' Retriveing data from the server '''
+    ''' 
+    Retriveing data from the server.
+
+    parameter:
+
+    url -> url of the server from which to get the data.
+    
+    returns the data if received, otherwise None.
+
+    '''
 
     try:
         response = request.urlopen(url)
-        #if using_std_lib : response = request.urlopen(url)
-        #else             : response = requests.get(url)
     except Exception as e: #error.URLError:
         print("Error : Couldn't reach the URL", end='\n')
         print(e, end="\n")
@@ -25,8 +32,6 @@ def get_data(url, using_std_lib=True):
             print('Success: Data retrieved successfully! - Status code: ' +
             str(response.status), end='\n')
             data = response.read().decode()
-            #if using_std_lib : data = response.read().decode()
-            #else             : data = response.content.decode() 
             json_data = json.loads(data)
         else:
             print("Error :" + str(response.status) + " -  Couldn't find the data", end='\n')
@@ -34,6 +39,7 @@ def get_data(url, using_std_lib=True):
 
 
 def get_top_characters(json_data, max_characters=10):
+
     '''
 
        Extracting requreed data into a json object.
@@ -42,6 +48,8 @@ def get_top_characters(json_data, max_characters=10):
        
        max_characters -> Number of characters for which the data should be filtered.
                          By default, extracts data for 10 characters if no value is passed.
+
+       Returns json format for the number of characters appearing in most films.
 
     '''
     
@@ -86,12 +94,15 @@ def get_top_characters(json_data, max_characters=10):
 
 
 def write_data(selected_characters, filename = 'Exported.csv'):
+
     '''
         Storing the extracted data in a csv file.
 
-        If the file name is passed, it's named as Exported.csv
+        If the file name is passed, it's named as "Exported.csv".
 
         The file is saved in the same folder as the script.
+
+        Returns the filename.
     '''
     
     with open(filename,'w',newline="") as export:
@@ -110,12 +121,14 @@ def post_data(url, filename=''):
     url      -> server URL.
     filename -> Name of the file to be uploaded.
 
+    Returns the tuple containing response object from the request and the status code.
+
     '''
    
     if not filename: return
 
     files = {}
-    files['file'] =  str(open(filename).read().strip())    
+    files['file'] = json.dumps(open(filename).read()) 
 
     post_data = {
         'title': '10 Characters that appeared in most Star Wars movie',
@@ -141,11 +154,14 @@ def post_data(url, filename=''):
             print('Success: File uploaded sucessfully! status : ' + str(response.status), end='\n')
         else:
             print("Error :" + str(response.status) + ": Couldn't upload file(s)!", end='\n')
-    return response.text, response.status
+    return response_text, response.status
 
     
 def show_data(selected_characters,max_characters=None):
-    ''' Show json data for exported data. '''
+    ''' 
+    Prints out the json formatted data for exported data. 
+
+    '''
 
     if not max_characters: max_characters = len(selected_characters)
     
@@ -164,10 +180,10 @@ if __name__ == '__main__':
     server = r'http://httpbin.org/anything'
 
     using_std_lib = True
-    json_data = get_data(url, using_std_lib)
+    json_data = get_data(url)
     if json_data:
         selected_characters = get_top_characters(json_data)
-        if selected_characters:
+        if  selected_characters is not None:
             show_data(selected_characters)
             filename = write_data(selected_characters)
             post_data(server,filename)

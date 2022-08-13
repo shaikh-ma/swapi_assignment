@@ -1,4 +1,5 @@
 using_std_libraries = False
+test_mode = False
 
 download_url     = r'https://swapi.dev/api/people/'
 upload_server    = r'http://httpbin.org/anything'
