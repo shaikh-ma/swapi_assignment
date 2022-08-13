@@ -27,6 +27,12 @@ git clone https://github.com/shaikh-ma/swapi-assignment/
 
 # Functions defined in the script(s)
 * get_data(*url*) 
+> *  Retriveing data from the server.
+> *  parameter:
+> *  url -> url of the server from which to get the data.
+> *  returns the data if received, otherwise None.
+
+* get_top_characters(_json_data_, _max_characters=10_)
 > * Extracting requreed data into a json object.
 > * json_data : The json file containing the data from server.
 > * max_characters : Number of characters for which the data should be filtered.
