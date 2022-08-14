@@ -57,8 +57,7 @@ git clone https://github.com/shaikh-ma/swapi-assignment/
 > * Returns the tuple containing response object from the request and the status code.
 
 #### Testing
-> * test_with_non_std_lib.py - For testing the script 'assignment_with_non_std_libraries.py'
-> * assignment_with_std_libraries.py - For testing the script 'assignment_with_std_libraries.py'
+> * test_swapi_assignment.py - This script can be used for running the test cases on the scripts.
 ---	
 
 #### Author : [Shaikh Mohammed Aamir](https://github.com/shaikh-ma)
