@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 USING_STD_LIBS = False
 swapi_url     = r'http://swapi.dev/api/people'
