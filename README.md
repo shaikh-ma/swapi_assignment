@@ -85,27 +85,31 @@ python test_swapi_assignment.py
 # Output :
 
 ## Generated CSV file content :
-| Sr.no | Character name | Species | Height | Appearances |
-| --- | --- | --- | --- | --- |
-| 1 | Darth Vader | - | 202 | 4 |
-| 2 | Biggs Darklighter | - | 183 | 1|
-| 3 | Obi-Wan Kenobi | - | 182 | 6|
-| 4 | Owen Lars | - | 178 | 3|
-| 5 | Luke Skywalker | - | 172  | 4|
-| 6 | C-3PO | Droid |  167  | 6|
-| 7 | Beru Whitesun lars | -  | 165 | 3|
-| 8 | Leia Organa | - | 150 | 4|
-| 9 | R5-D4 | Droid | - | 97 | 1|
-| 10 | R2-D2 |Droid | - | 96 | 6|
+| Sr.no| Character name     | Species | Height | Appearances |
+| ---- | -----------------  | ------- | ------ | ----------- |
+|  1   | Darth Vader        |   -     |   202  |      4      |
+|  2   | Biggs Darklighter  |   -     |   183  |      1      |
+|  3   | Obi-Wan Kenobi     |   -     |   182  |      6      |
+|  4   | Owen Lars          |   -     |   178  |      3      |
+|  5   | Luke Skywalker     |   -     |   172  |      4      |
+|  6   | C-3PO              |  Droid  |   167  |      6      |
+|  7   | Beru Whitesun lars |   -     |   165  |      3      |
+|  8   | Leia Organa        |   -     |   150  |      4      |
+|  9   | R5-D4              |  Droid  |   97   |      1      |
+|  10  | R2-D2              |  Droid  |   96   |      6      |
        
-Image:      
-![generated_csv](https://github.com/shaikh-ma/swapi_assignment/blob/main/generated_csv.JPG)
+<!--Image:      
+![generated_csv](https://github.com/shaikh-ma/swapi_assignment/blob/main/generated_csv.JPG) -->
 
 ## Response from HttpBin.org for POST request:
 ![post_request_response](https://github.com/shaikh-ma/swapi_assignment/blob/main/results.JPG)
 
 ## Test Results :
  ![test_results](https://github.com/shaikh-ma/swapi_assignment/blob/main/test_Result.JPG)
+
+----
+
+<br>
 
 #### Author : [Shaikh Mohammed Aamir](https://github.com/shaikh-ma)
 #### Date Created : 13-08-2022
