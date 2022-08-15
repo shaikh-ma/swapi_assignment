@@ -1,5 +1,7 @@
+import pprint
+
 using_std_libraries = False
-test_mode = False
+
 
 download_url     = r'https://swapi.dev/api/people/'
 upload_server    = r'http://httpbin.org/anything'
@@ -11,7 +13,7 @@ try:
 except ModuleNotFoundError:
     import assignment_with_std_libraries 
     using_std_libraries = True
-    print('No 3rd party libraries found!\nUsing standard modules.')
+    print('No 3rd party libraries found!\n\nUsing standard modules.\n\n')
 
 
 
@@ -21,6 +23,7 @@ if using_std_libraries:
     if json_data is not None:
        selected_characters = assignment_with_std_libraries.get_top_characters(json_data)
        if selected_characters is not None:
+           print('\n Showing data summary :')
            assignment_with_std_libraries.show_data(selected_characters)
            filename = assignment_with_std_libraries.write_data(selected_characters)
            response, upload_status = assignment_with_std_libraries.post_data(upload_server, filename)
@@ -34,9 +37,30 @@ else:
            response, upload_status = assignment_with_non_std_libraries.post_data(upload_server, filename)
 
 
+print()
 if upload_status == 200:
-    print('File has been uploaded successfully!') 
-    print(response) 
-
+    print('-'*50)
+    print('File has been uploaded successfully!')
+    print('-'*50)
+    print('\n')
+    print('-'*50)
+    print('Response from HttpBin.org')
+    print('-'*50)
+    print()
+    pprint.pprint(response)
+    print('\n\n')
+    print('-'*50)
+    
 else:
+    print('-'*50)
     print('Error: Encountered an error - status code :' + str(upload_status))
+    print('-'*50)
+
+
+print('\n\n\n')
+
+exit_app = ''
+
+while exit_app.strip().lower() not in ('q','quit','exit'):
+    exit_app = input("To exit enter 'q','quit','exit' :")
+    
