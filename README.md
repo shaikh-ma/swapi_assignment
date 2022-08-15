@@ -84,6 +84,9 @@ python test_swapi_assignment.py
 
 # Output :
 
+## Exported data     
+![generated_csv](https://github.com/shaikh-ma/swapi_assignment/blob/main/filtered_data.PNG)
+
 ## Generated CSV file content :
 | Sr.no| Character name     | Species | Height | Appearances |
 | ---- | -----------------  | ------- | ------ | ----------- |
