@@ -38,10 +38,14 @@ python test_swapi_assignment.py
 * Approach 1 : Using Python Standard libraries & builtin functions if in case the 3rd party packages are not installed.
 * Approach 2 : Using 3rd party libraries (like pandas, request) in case if these packages are already installed on the user system.
 
+<br><br>
+
 ## There are total 3 scripts,
-1. main.py - This is the main script, it checks if the pandas, request libraries are available or not and selects the script based on it, to run the program.
-2. assignment_with_std_libraries.py  - This script uses the standard modules (urllib, json, csv) with builtin functions.
-3. assignment_with_non_std_libraries.py  - This script uses the 3rd party modules (pandas and requests).
+| Script name | What it does  |
+| ---- | --- |
+| main.py | This is the main script, it checks if the pandas, request libraries are available or not and selects the script based on it, to run the program.|
+| assignment_with_std_libraries.py  | This script uses the standard modules (urllib, json, csv) with builtin functions. |
+| assignment_with_non_std_libraries.py  | This script uses the 3rd party modules (pandas and requests). |
 
 <br><br>
 
@@ -78,6 +82,30 @@ python test_swapi_assignment.py
 
 <br>
 
+# Output :
+
+## Generated CSV file content :
+| Sr.no | Character name | Species | Height | Appearances |
+| --- | --- | --- | --- | --- |
+| 1 | Darth Vader | - | 202 | 4 |
+| 2 | Biggs Darklighter | - | 183 | 1|
+| 3 | Obi-Wan Kenobi | - | 182 | 6|
+| 4 | Owen Lars | - | 178 | 3|
+| 5 | Luke Skywalker | - | 172  | 4|
+| 6 | C-3PO | Droid |  167  | 6|
+| 7 | Beru Whitesun lars | -  | 165 | 3|
+| 8 | Leia Organa | - | 150 | 4|
+| 9 | R5-D4 | Droid | - | 97 | 1|
+| 10 | R2-D2 |Droid | - | 96 | 6|
+       
+Image:      
+![generated_csv](https://github.com/shaikh-ma/swapi_assignment/blob/main/generated_csv.JPG)
+
+## Response from HttpBin.org for POST request:
+![post_request_response](https://github.com/shaikh-ma/swapi_assignment/blob/main/results.JPG)
+
+## Test Results :
+ ![test_results](https://github.com/shaikh-ma/swapi_assignment/blob/main/test_Result.JPG)
 
 #### Author : [Shaikh Mohammed Aamir](https://github.com/shaikh-ma)
 #### Date Created : 13-08-2022
