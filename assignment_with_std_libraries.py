@@ -1,27 +1,26 @@
-from urllib import request, error
-#import urllib
-import json,csv
 from os import path 
 from pprint import pprint
-
+from urllib import request, error
+import json,csv
 
 
 def get_data(url):
-
     ''' 
     Retriveing data from the server.
 
-    parameter:
+    Parameters
+    ----------
 
-    url -> url of the server from which to get the data.
+    url : URL of the server from which to get the data.
     
-    returns the data if received, otherwise None.
-
+    Returns
+    -------
+    The data if received, otherwise None.
     '''
 
     try:
-        response = request.urlopen(url)
-    except Exception as e: #error.URLError:
+        response = request.urlopen(url=url, context=False)
+    except Exception as e: 
         print("Error : Couldn't reach the URL", end='\n')
         print(e, end="\n")
         return None
@@ -39,20 +38,22 @@ def get_data(url):
 
 
 def get_top_characters(json_data, max_characters=10):
-
     '''
+    Extracting requreed data into a json object.
 
-       Extracting requreed data into a json object.
-
-       json_data -> The json file containing the data from server.
-       
-       max_characters -> Number of characters for which the data should be filtered.
-                         By default, extracts data for 10 characters if no value is passed.
-
-       Returns json format for the number of characters appearing in most films.
-
-    '''
+    Parameters
+    ----------
+    json_data :
+    The json file containing the data from server.
     
+    max_characters :
+    Number of characters for which the data should be filtered.
+    By default, extracts data for 10 characters if no value is passed.
+
+    Returns
+    --------
+    json format for the number of characters appearing in most films.
+    '''
     try:
         int(max_characters)
     except Exception:
@@ -66,16 +67,12 @@ def get_top_characters(json_data, max_characters=10):
         return None
     else:
         characters.sort(key=lambda x: len(x['films']),reverse=True)
-
         selected_characters = characters[:max_characters]
-
         selected_characters.sort(key=lambda x: int(x['height']),reverse=True)
 
         species_type = []
-
         for character in selected_characters:
             link = character['species']
-            
             if link:
                 link = link[0]
                 sp_type = json.loads(request.urlopen(link).read().decode())
@@ -90,22 +87,27 @@ def get_top_characters(json_data, max_characters=10):
             character['appearances'] = appearances[ind]
     return selected_characters
 
-    
-
 
 def write_data(selected_characters, filename = 'Exported.csv'):
-
     '''
-        Storing the extracted data in a csv file.
+    Storing the extracted data in a csv file.
+    If the file name is passed, it's named as "Exported.csv".
+    The file is saved in the same folder as the script.
 
-        If the file name is passed, it's named as "Exported.csv".
+    Parameters
+    ----------
+    selected_characters:
+    The DataFrame object
 
-        The file is saved in the same folder as the script.
+    filename:
+    Name of the file with which it needs to be saved.
+    If not passed, it is saved as "Exported.csv"
 
-        Returns the filename.
+    Returns
+    -------
+    Filename
     '''
-    
-    with open(filename,'w',newline="") as export:
+    with open(filename, 'w', newline="") as export:
         csv_writer = csv.writer(export)
         for row in selected_characters:
             line = [row['name'],row['species_name'],row['height'],row['appearances']]
@@ -118,14 +120,16 @@ def post_data(url, filename=''):
     '''
     Uploading the files to the server.
 
-    url      -> server URL.
-    filename -> Name of the file to be uploaded.
+    Parameters
+    ----------
+    url      : server URL.
+    filename : Name of the file to be uploaded.
 
-    Returns the tuple containing response object from the request and the status code.
-
+    Returns 
+    ------- 
+    The tuple containing response object from the request and the status code.
     '''
-   
-    if not filename: return
+    if not filename: return None
 
     files = {}
     files['file'] = json.dumps(open(filename).read()) 
@@ -136,7 +140,6 @@ def post_data(url, filename=''):
     }
     
     try:
-        
         json_string = json.dumps(post_data)
         post_data = json_string.encode("utf-8")
         headers = {"Content-Type":"applicatoin/json"}
@@ -160,12 +163,12 @@ def post_data(url, filename=''):
 def show_data(selected_characters,max_characters=None):
     ''' 
     Prints out the json formatted data for exported data. 
-
     '''
 
-    if not max_characters: max_characters = len(selected_characters)
+    if not max_characters:
+        max_characters = len(selected_characters)
     
-    for num,character in enumerate(selected_characters):
+    for num, character in enumerate(selected_characters):
         if num >= max_characters:break
         print('-'*50,end='\n')
         print('Character ' + str(num+1) + ':     ' + character['name'])
@@ -176,11 +179,12 @@ def show_data(selected_characters,max_characters=None):
 
 
 if __name__ == '__main__':
-    url    = r'https://swapi.dev/api/people/'
+    url    = r'http://swapi.dev/api/people/'
     server = r'http://httpbin.org/anything'
 
     using_std_lib = True
     json_data = get_data(url)
+
     if json_data:
         selected_characters = get_top_characters(json_data)
         if  selected_characters is not None:

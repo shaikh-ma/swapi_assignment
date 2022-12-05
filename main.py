@@ -2,7 +2,6 @@ import pprint
 
 using_std_libraries = False
 
-
 download_url     = r'https://swapi.dev/api/people/'
 upload_server    = r'http://httpbin.org/anything'
 
@@ -14,8 +13,6 @@ except ModuleNotFoundError:
     import assignment_with_std_libraries 
     using_std_libraries = True
     print('No 3rd party libraries found!\n\nUsing standard modules.\n\n')
-
-
 
 upload_status = None
 if using_std_libraries:
