@@ -23,7 +23,7 @@ if using_std_libraries:
         selected_characters = assignment_with_std_libraries.get_top_characters(
             json_data
         )
-        if selected_characters:
+        if selected_characters is not None:
             print("\n Showing data summary :")
             assignment_with_std_libraries.show_data(selected_characters)
             filename = assignment_with_std_libraries.write_data(selected_characters)
@@ -36,7 +36,7 @@ else:
         selected_characters = assignment_with_non_std_libraries.get_top_characters(
             json_data
         )
-        if selected_characters:
+        if selected_characters is not None:
             assignment_with_non_std_libraries.show_data(selected_characters)
             filename = assignment_with_non_std_libraries.write_data(selected_characters)
             response, upload_status = assignment_with_non_std_libraries.post_data(

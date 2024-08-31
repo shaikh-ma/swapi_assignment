@@ -71,9 +71,7 @@ def get_top_characters(json_data, max_characters=10):
         else:
             species_type.append("")
 
-    appearances = [len(x) for x in df["films"]]
-
-    df["appearances"] = appearances
+    df["appearances"] = [len(x) for x in df["films"]]
     df["species"] = species_type
     return df
 
@@ -117,12 +115,13 @@ def post_data(url, filename=""):
 
     Parameters
     ----------
-    url      : server URL
+    url      : Server URL
     filename : Name of the file to be uploaded
 
     Returns
     -------
-    The tuple containing response object from the request and the status code.
+    The tuple containing response object
+    from the request and the status code.
     """
 
     files = {}
@@ -154,7 +153,7 @@ if __name__ == "__main__":
     results = get_data(url)
     if results:
         selected_characters = get_top_characters(results)
-        if selected_characters:
+        if selected_characters is not None:
             show_data(selected_characters)
             write_data(selected_characters)
             post_data(server, "Exported.csv")
