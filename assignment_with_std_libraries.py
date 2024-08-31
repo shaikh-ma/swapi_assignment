@@ -199,7 +199,7 @@ if __name__ == "__main__":
 
     if json_data:
         selected_characters = get_top_characters(json_data)
-        if selected_characters is not None:
+        if selected_characters:
             show_data(selected_characters)
             filename = write_data(selected_characters)
             post_data(server, filename)

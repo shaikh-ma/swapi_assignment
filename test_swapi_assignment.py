@@ -17,9 +17,9 @@ except ModuleNotFoundError:
 class TestSwapi(unittest.TestCase):
     def setUp(self):
         self.json_data = script.get_data(swapi_url)
-        if self.json_data is not None:
+        if self.json_data:
             self.selected_characters = script.get_top_characters(self.json_data)
-        if self.selected_characters is not None:
+        if self.selected_characters:
             # script.show_data(self.selected_characters)
             self.filename = script.write_data(self.selected_characters)
             self.response, self.upload_status = script.post_data(
