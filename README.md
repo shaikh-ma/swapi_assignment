@@ -84,8 +84,9 @@ python test_swapi_assignment.py
 
 # Output :
 
-## Exported data     
-![generated_csv](https://github.com/shaikh-ma/swapi_assignment/blob/main/filtered_data.PNG)
+## Exported data  
+![generated_csv](https://github.com/user-attachments/assets/bfa23098-811d-49de-9a9d-6f13132187e1)
+
 
 ## Generated CSV file content :
 | Sr.no| Character name     | Species | Height | Appearances |
@@ -105,10 +106,12 @@ python test_swapi_assignment.py
 ![generated_csv](https://github.com/shaikh-ma/swapi_assignment/blob/main/generated_csv.JPG) -->
 
 ## Response from HttpBin.org for POST request:
-![post_request_response](https://github.com/shaikh-ma/swapi_assignment/blob/main/results.JPG)
+<!--![post_request_response](https://github.com/shaikh-ma/swapi_assignment/blob/main/results.JPG) -->
+![results](https://github.com/user-attachments/assets/ace4c05f-6b5c-4590-a0d9-0d735b783aaa)
 
 ## Test Results :
- ![test_results](https://github.com/shaikh-ma/swapi_assignment/blob/main/test_Result.JPG)
+<!-- ![test_results](https://github.com/shaikh-ma/swapi_assignment/blob/main/test_Result.JPG) -->
+![test_Result](https://github.com/user-attachments/assets/a4cc0b8d-a5ea-40d1-b990-4258811240eb)
 
 ----
 
