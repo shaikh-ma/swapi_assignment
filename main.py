@@ -2,13 +2,9 @@ import pprint
 
 using_std_libraries = False
 
-download_url = r"https://swapi.dev/api/people/"
-upload_server = r"http://httpbin.org/anything"
+from const import url, server
 
 try:
-    import pandas as pd
-    import requests
-
     import assignment_with_non_std_libraries
 except ModuleNotFoundError:
     import assignment_with_std_libraries
@@ -18,7 +14,7 @@ except ModuleNotFoundError:
 
 upload_status = None
 if using_std_libraries:
-    json_data = assignment_with_std_libraries.get_data(download_url)
+    json_data = assignment_with_std_libraries.get_data(url)
     if json_data:
         selected_characters = assignment_with_std_libraries.get_top_characters(
             json_data
@@ -28,10 +24,10 @@ if using_std_libraries:
             assignment_with_std_libraries.show_data(selected_characters)
             filename = assignment_with_std_libraries.write_data(selected_characters)
             response, upload_status = assignment_with_std_libraries.post_data(
-                upload_server, filename
+                server, filename
             )
 else:
-    json_data = assignment_with_non_std_libraries.get_data(download_url)
+    json_data = assignment_with_non_std_libraries.get_data(url)
     if json_data:
         selected_characters = assignment_with_non_std_libraries.get_top_characters(
             json_data
@@ -40,7 +36,7 @@ else:
             assignment_with_non_std_libraries.show_data(selected_characters)
             filename = assignment_with_non_std_libraries.write_data(selected_characters)
             response, upload_status = assignment_with_non_std_libraries.post_data(
-                upload_server, filename
+                server, filename
             )
 
 
