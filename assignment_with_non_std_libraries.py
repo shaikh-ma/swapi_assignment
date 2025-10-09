@@ -147,8 +147,7 @@ def post_data(url, filename=""):
 
 
 if __name__ == "__main__":
-    url = r"https://swapi.dev/api/people/"
-    server = r"http://httpbin.org/anything"
+    from const import url, server
 
     results = get_data(url)
     if results:

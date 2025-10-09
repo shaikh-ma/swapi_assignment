@@ -10,8 +10,8 @@ def get_data(url):
 
     Parameters
     ----------
-
-    url : URL of the server from which to get the data.
+    url : str
+    URL of the server from which to get the data.
 
     Returns
     -------
@@ -36,8 +36,7 @@ def get_data(url):
             data = response.read().decode()
             json_data = json.loads(data)
         else:
-            msg = "Error :{} -  Couldn't find the data".format(response.status)
-            print(msg, end="\n")
+            print(f"Error :{response.status} -  Couldn't find the data", end="\n")
     return json_data
 
 
@@ -47,10 +46,10 @@ def get_top_characters(json_data, max_characters=10):
 
     Parameters
     ----------
-    json_data :
+    json_data : file
     The json file containing the data from server.
 
-    max_characters :
+    max_characters : int
     Number of characters for which the data should be filtered.
     By default, extracts data for 10 characters if no value is passed.
 
@@ -103,7 +102,7 @@ def write_data(selected_characters, filename="Exported.csv"):
     selected_characters:
     The DataFrame object
 
-    filename:
+    filename: str
     Name of the file with which it needs to be saved.
     If not passed, it is saved as "Exported.csv"
 
@@ -191,8 +190,7 @@ def show_data(selected_characters, max_characters=None):
 
 
 if __name__ == "__main__":
-    url = r"http://swapi.dev/api/people/"
-    server = r"http://httpbin.org/anything"
+    from const import url, server
 
     using_std_lib = True
     json_data = get_data(url)
