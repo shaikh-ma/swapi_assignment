@@ -25,9 +25,7 @@ def get_data(url):
         print(e, end="\n")
         return None
     else:
-        is_received = response.status == 200
-
-        if is_received:
+        if is_received:= response.status == 200:
             print(
                 "Success: Data retrieved successfully! - Status code: "
                 + str(response.status),
@@ -42,7 +40,7 @@ def get_data(url):
 
 def get_top_characters(json_data, max_characters=10):
     """
-    Extracting requreed data into a json object.
+    Extracting required data into a json object.
 
     Parameters
     ----------
@@ -60,13 +58,13 @@ def get_top_characters(json_data, max_characters=10):
     try:
         int(max_characters)
     except Exception:
-        print("Error : Max characters should be entered as a integer number", end="\n")
+        print("Error: Max characters should be entered as a integer number", end="\n")
         return None
 
     try:
         characters = json_data["results"]
     except Exception:
-        print('"Error : Required fields not found.', end="\n")
+        print('"Error: Required fields not found.', end="\n")
         return None
     else:
         characters.sort(key=lambda x: len(x["films"]), reverse=True)
@@ -115,7 +113,7 @@ def write_data(selected_characters, filename="Exported.csv"):
         for row in selected_characters:
             line = [row["name"], row["species_name"], row["height"], row["appearances"]]
             csv_writer.writerow(line)
-    print("Success : File Saved as " + filename, end="\n")
+    print("Success: File Saved as " + filename, end="\n")
     return filename
 
 
@@ -130,7 +128,7 @@ def post_data(url, filename=""):
 
     Returns
     -------
-    The tuple containing response object from the request and the status code.
+    A tuple containing response object from the request and the status code.
     """
     if not filename:
         return None
@@ -193,9 +191,8 @@ if __name__ == "__main__":
     from const import url, server
 
     using_std_lib = True
-    json_data = get_data(url)
 
-    if json_data:
+    if json_data := get_data(url):
         selected_characters = get_top_characters(json_data)
         if selected_characters is not None:
             show_data(selected_characters)
