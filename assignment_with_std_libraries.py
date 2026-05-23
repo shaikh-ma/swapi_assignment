@@ -25,7 +25,7 @@ def get_data(url):
         print(e, end="\n")
         return None
     else:
-        if is_received:= response.status == 200:
+        if is_received := response.status == 200:
             print(
                 "Success: Data retrieved successfully! - Status code: "
                 + str(response.status),
@@ -188,7 +188,7 @@ def show_data(selected_characters, max_characters=None):
 
 
 if __name__ == "__main__":
-    from const import url, server
+    from const import server, url
 
     using_std_lib = True
 

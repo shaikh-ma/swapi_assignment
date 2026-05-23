@@ -2,7 +2,7 @@ import pprint
 
 using_std_libraries = False
 
-from const import url, server
+from const import server, url
 
 try:
     import assignment_with_non_std_libraries
@@ -14,7 +14,7 @@ except ModuleNotFoundError:
 
 upload_status = None
 if using_std_libraries:
-    if json_data:= assignment_with_std_libraries.get_data(url) :
+    if json_data := assignment_with_std_libraries.get_data(url):
         selected_characters = assignment_with_std_libraries.get_top_characters(
             json_data
         )
@@ -26,7 +26,7 @@ if using_std_libraries:
                 server, filename
             )
 else:
-    if json_data:= assignment_with_non_std_libraries.get_data(url): 
+    if json_data := assignment_with_non_std_libraries.get_data(url):
         selected_characters = assignment_with_non_std_libraries.get_top_characters(
             json_data
         )

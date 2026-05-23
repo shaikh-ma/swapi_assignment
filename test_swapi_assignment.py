@@ -3,9 +3,6 @@ USING_STD_LIBS = False
 swapi_url = r"http://swapi.dev/api/people"
 upload_server = r"http://httpbin.org/anything"
 try:
-    import pandas
-    import requests
-
     import assignment_with_non_std_libraries as script
 except ModuleNotFoundError:
     import assignment_with_std_libraries as script
@@ -23,6 +20,6 @@ def test_get_data():
     filename = script.write_data(selected_characters)
     response, upload_status = script.post_data(upload_server, filename)
 
-    assert filename != None
-    assert response != None
+    assert filename is not None
+    assert response is not None
     assert upload_server != 200

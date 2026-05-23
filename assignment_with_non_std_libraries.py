@@ -147,7 +147,7 @@ def post_data(url, filename=""):
 
 
 if __name__ == "__main__":
-    from const import url, server
+    from const import server, url
 
     results = get_data(url)
     if results:
