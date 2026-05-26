@@ -25,7 +25,7 @@ def get_data(url):
         print(e, end="\n")
         return None
     else:
-        if is_received := response.status == 200:
+        if response.status == 200:
             print(
                 "Success: Data retrieved successfully! - Status code: "
                 + str(response.status),
@@ -34,7 +34,9 @@ def get_data(url):
             data = response.read().decode()
             json_data = json.loads(data)
         else:
-            print(f"Error :{response.status} -  Couldn't find the data", end="\n")
+            print(
+                f"Error: {response.status} - Couldn't find the data", end="\n"
+            )
     return json_data
 
 
@@ -58,7 +60,10 @@ def get_top_characters(json_data, max_characters=10):
     try:
         int(max_characters)
     except Exception:
-        print("Error: Max characters should be entered as a integer number", end="\n")
+        print(
+            "Error: Max characters should be entered as a integer number",
+            end="\n",
+        )
         return None
 
     try:
@@ -111,7 +116,12 @@ def write_data(selected_characters, filename="Exported.csv"):
     with open(filename, "w", newline="") as export:
         csv_writer = csv.writer(export)
         for row in selected_characters:
-            line = [row["name"], row["species_name"], row["height"], row["appearances"]]
+            line = [
+                row["name"],
+                row["species_name"],
+                row["height"],
+                row["appearances"],
+            ]
             csv_writer.writerow(line)
     print("Success: File Saved as " + filename, end="\n")
     return filename
@@ -157,12 +167,15 @@ def post_data(url, filename=""):
             response_text = json.loads(response.read().decode("utf-8"))
             pprint(response_text)
             print(
-                "Success: File uploaded sucessfully! status : " + str(response.status),
+                "Success: File uploaded sucessfully! status : "
+                + str(response.status),
                 end="\n",
             )
         else:
             print(
-                "Error :" + str(response.status) + ": Couldn't upload file(s)!",
+                "Error :"
+                + str(response.status)
+                + ": Couldn't upload file(s)!",
                 end="\n",
             )
     return response_text, response.status
