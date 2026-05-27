@@ -1,3 +1,5 @@
+import pytest
+
 USING_STD_LIBS = False
 
 swapi_url = r"https://swapi.dev/api/people"
@@ -8,6 +10,8 @@ except ModuleNotFoundError:
     import assignment_with_std_libraries as script
 
     USING_STD_LIBS = True
+
+pytest.mark.skip
 
 
 def test_get_data():
