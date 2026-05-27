@@ -1,6 +1,6 @@
 USING_STD_LIBS = False
 
-swapi_url = r"http://swapi.dev/api/people"
+swapi_url = r"https://swapi.dev/api/people"
 upload_server = r"https://httpbin.org/anything"
 try:
     import assignment_with_non_std_libraries as script

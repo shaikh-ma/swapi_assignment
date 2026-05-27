@@ -1,4 +1,4 @@
 # Constants
 
-url = r"http://swapi.dev/api/people/"
+url = r"https://swapi.dev/api/people/"
 server = r"https://httpbin.org/anything"
