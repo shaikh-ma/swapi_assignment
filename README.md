@@ -8,7 +8,6 @@
 <br>
 
 # How to prepare the enviroment : 
-## Clone the project:
 ```
 git clone https://github.com/shaikh-ma/swapi_assignment/
 ```
@@ -16,7 +15,6 @@ git clone https://github.com/shaikh-ma/swapi_assignment/
 <br>
 
 # How to execute the program:
-## Execute the program:
 ```
 python main.py
 ```
@@ -24,7 +22,6 @@ python main.py
 <br>
 
 # How to execute the test:
-## Execute the tests:
 ```
 python test_swapi_assignment.py
 ```
