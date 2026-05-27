@@ -11,9 +11,8 @@ except ModuleNotFoundError:
 
     USING_STD_LIBS = True
 
-pytest.mark.skip
 
-
+@pytest.mark.skip
 def test_get_data():
     json_data = script.get_data(swapi_url)
     assert json_data
