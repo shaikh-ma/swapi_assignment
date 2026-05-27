@@ -8,7 +8,7 @@
 <br>
 
 # How to prepare the enviroment : 
-##  To clone the project use the below:
+## Clone the project:
 ```
 git clone https://github.com/shaikh-ma/swapi_assignment/
 ```
@@ -16,7 +16,7 @@ git clone https://github.com/shaikh-ma/swapi_assignment/
 <br>
 
 # How to execute the program:
-##  To execute the program, run the script 'main.py'
+## Execute the program:
 ```
 python main.py
 ```
@@ -24,7 +24,7 @@ python main.py
 <br>
 
 # How to execute the test:
-##  To execute the tests, run the script 'test_swapi_assignment.py'
+## Execute the tests:
 ```
 python test_swapi_assignment.py
 ```
@@ -36,14 +36,14 @@ python test_swapi_assignment.py
 # About the script :
 ## The script has been designed using the below two approaches:
 * Approach 1 : Using Python Standard libraries & builtin functions if in case the 3rd party packages are not installed.
-* Approach 2 : Using 3rd party libraries (like pandas, request) in case if these packages are already installed on the user system.
+* Approach 2 : Using 3rd party libraries (like pandas, requests) in case if these packages are already installed on the user system.
 
 <br><br>
 
 ## There are total 3 scripts,
 | Script name | What it does  |
 | ---- | --- |
-| main.py | This is the main script, it checks if the pandas, request libraries are available or not and selects the script based on it, to run the program.|
+| main.py | This is the main script, it checks if the pandas, requests libraries are available or not and selects the script based on it, to run the program.|
 | assignment_with_std_libraries.py  | This script uses the standard modules (urllib, json, csv) with builtin functions. |
 | assignment_with_non_std_libraries.py  | This script uses the 3rd party modules (pandas and requests). |
 
@@ -117,6 +117,5 @@ python test_swapi_assignment.py
 
 <br>
 
-#### Author : [Shaikh Mohammed Aamir](https://github.com/shaikh-ma)
-#### Date Created : 13-08-2022
-#### Project Type : Test Assignment
+#### Author: [Shaikh Mohammed Aamir](https://github.com/shaikh-ma)
+#### Date Created: 13-08-2022
