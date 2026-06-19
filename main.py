@@ -21,24 +21,20 @@ if using_std_libraries:
         if selected_characters is not None:
             print("\n Showing data summary :")
             assignment_with_std_libraries.show_data(selected_characters)
-            filename = assignment_with_std_libraries.write_data(
-                selected_characters
-            )
+            filename = assignment_with_std_libraries.write_data(selected_characters)
             response, upload_status = assignment_with_std_libraries.post_data(
                 server, filename
             )
 else:
     if json_data := assignment_with_non_std_libraries.get_data(url):
-        selected_characters = (
-            assignment_with_non_std_libraries.get_top_characters(json_data)
+        selected_characters = assignment_with_non_std_libraries.get_top_characters(
+            json_data
         )
         if selected_characters is not None:
             assignment_with_non_std_libraries.show_data(selected_characters)
-            filename = assignment_with_non_std_libraries.write_data(
-                selected_characters
-            )
-            response, upload_status = (
-                assignment_with_non_std_libraries.post_data(server, filename)
+            filename = assignment_with_non_std_libraries.write_data(selected_characters)
+            response, upload_status = assignment_with_non_std_libraries.post_data(
+                server, filename
             )
 
 

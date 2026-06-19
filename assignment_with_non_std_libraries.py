@@ -33,7 +33,7 @@ def get_data(url):
             data = response.text
             json_data = json.loads(data)
         else:
-            msg = "Error:{} -  Couldn't find the data".format(response.status_code)
+            msg = f"Error: {response.status_code} - Couldn't find the data"
             print(msg, end="\n")
     return json_data
 
@@ -140,7 +140,7 @@ def post_data(url, filename=""):
         if response.status_code == 200:
             print("Success : File(s) uploaded successfully!")
         else:
-            print("Error {}: Couldn't upload file(s)!".format(response.status_code))
+            print(f"Error {response.status_code}: Couldn't upload file(s)!")
         print(response.text)
         print(response.status_code)
     return response.text, response.status_code

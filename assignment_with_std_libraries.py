@@ -34,9 +34,7 @@ def get_data(url):
             data = response.read().decode()
             json_data = json.loads(data)
         else:
-            print(
-                f"Error: {response.status} - Couldn't find the data", end="\n"
-            )
+            print(f"Error: {response.status} - Couldn't find the data", end="\n")
     return json_data
 
 
@@ -123,7 +121,7 @@ def write_data(selected_characters, filename="Exported.csv"):
                 row["appearances"],
             ]
             csv_writer.writerow(line)
-    print("Success: File Saved as " + filename, end="\n")
+    print(f"Success: File Saved as {filename}", end="\n")
     return filename
 
 
@@ -167,15 +165,12 @@ def post_data(url, filename=""):
             response_text = json.loads(response.read().decode("utf-8"))
             pprint(response_text)
             print(
-                "Success: File uploaded sucessfully! status : "
-                + str(response.status),
+                f"Success: File uploaded sucessfully! status: {response.status}",
                 end="\n",
             )
         else:
             print(
-                "Error :"
-                + str(response.status)
-                + ": Couldn't upload file(s)!",
+                "Error :{response.status}: Couldn't upload file(s)!",
                 end="\n",
             )
     return response_text, response.status
